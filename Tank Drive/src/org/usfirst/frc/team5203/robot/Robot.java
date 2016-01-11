@@ -1,32 +1,67 @@
 package org.usfirst.frc.team5203.robot;
 
 
+import org.usfirst.frc.team5203.robot.gameStates.Autonomous;
+import org.usfirst.frc.team5203.robot.gameStates.Disabled;
+import org.usfirst.frc.team5203.robot.gameStates.TeleOp;
+import org.usfirst.frc.team5203.robot.gameStates.Test;
+
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 
 public class Robot extends IterativeRobot {
-    RobotDrive myRobot;
+    RobotDrive robot;
     Joystick controller;
+    public Compressor compressor = new Compressor();
     public Robot() {
-        myRobot = new RobotDrive(0, 1);
-        myRobot.setExpiration(0.1);
+        robot = new RobotDrive(0, 1);
+        robot.setExpiration(0.1);
         controller = new Joystick(0);
-        myRobot.setSafetyEnabled(true);
+        robot.setSafetyEnabled(true);
     }
 
-    /**
-     * Runs when the teleop period begins
+    /* (non-Javadoc)
+     * @see edu.wpi.first.wpilibj.IterativeRobot#teleopInit()
      */
-    public void TeleopInit() {}
-    /**
-     * Runs when autonomous is run
+    public void teleopInit() {
+    	TeleOp.init(robot);
+    }
+    /* (non-Javadoc)
+     * @see edu.wpi.first.wpilibj.IterativeRobot#teleopPeriodic()
      */
-    public void AutonomousInit(){}
-    /**
-     * Runs when robot is disabled
+    public void teleopPeriodic(){
+    	TeleOp.update(robot, compressor);
+    }
+    /* (non-Javadoc)
+     * @see edu.wpi.first.wpilibj.IterativeRobot#autonomousInit()
      */
-    public void DisabledInit(){}
-    
-
+    public void autonomousInit(){
+    	Autonomous.init(robot);
+    }
+    /* (non-Javadoc)
+     * @see edu.wpi.first.wpilibj.IterativeRobot#autonomousPeriodic()
+     */
+    public void autonomousPeriodic(){
+    	Autonomous.update(robot);
+    }
+    /* (non-Javadoc)
+     * @see edu.wpi.first.wpilibj.IterativeRobot#disabledInit()
+     */
+    public void disabledInit(){
+    	Disabled.init(robot);
+    }
+    /* (non-Javadoc)
+     * @see edu.wpi.first.wpilibj.IterativeRobot#testInit()
+     */
+    public void testInit(){
+    	Test.init(robot);
+    }
+    /* (non-Javadoc)
+     * @see edu.wpi.first.wpilibj.IterativeRobot#testPeriodic()
+     */
+    public void testPeriodic(){
+    	Test.update(robot);
+    }
 }
