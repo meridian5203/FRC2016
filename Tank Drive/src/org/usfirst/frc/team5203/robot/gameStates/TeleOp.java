@@ -16,11 +16,15 @@ public class TeleOp {
 	/**
 	 * @param robot
 	 * @param compressor
+	 * @param motors
+	 * @param solenoid
+	 * @param j
 	 */
 	public static void update(RobotDrive robot, Compressor compressor, TalonSRX[] motors, Solenoid[] solenoid, Joystick j){
-		boolean buttonA = (j.getRawButton(0)) ? true : false;
-		boolean buttonB = (j.getRawButton(1)) ? true: false;
+		boolean buttonA = (j.getRawButton(1)) ? true : false;
+		boolean buttonB = (j.getRawButton(2)) ? true: false;
 		
+		robot.arcadeDrive(j);
 		Launcher.fire(motors, buttonA, solenoid[0]);
 		Launcher.suck(motors, buttonB);
 		
