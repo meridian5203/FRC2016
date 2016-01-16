@@ -3,8 +3,8 @@ package org.usfirst.frc.team5203.robot;
 public class Variables {
 
 	//Speeds
-	public static int suckSpeed = 50;
-	public static int fireSpeed = 100;
+	public static double suckSpeed = .80;
+	public static double fireSpeed = -1.0;
 	
 	
 	//PWM Ports

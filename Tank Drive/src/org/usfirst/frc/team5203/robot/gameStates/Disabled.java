@@ -6,6 +6,8 @@ public class Disabled {
 
 	public static void init(RobotDrive robot){
 		
+		
+		
 	}
 	
 }
